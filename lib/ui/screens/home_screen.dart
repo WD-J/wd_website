@@ -155,22 +155,26 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             return Column(
               children: [
-                Flexible(
+                Expanded(
+                  flex: 40,
                   child: Container(
                     color: Colors.white,
                     child: Center(
-                      child: Container(
-                        width: 175,
-                        color: Colors.black,
-                        child: Image.asset(
-                          'assets/images/image_of_me.png',
-                          fit: BoxFit.fitHeight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(25.0),
+                        child: Container(
+                          color: Colors.black,
+                          child: Image.asset(
+                            'assets/images/image_of_me.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
                 Expanded(
+                  flex: 60,
                   child: Container(
                     color: Colors.black,
                     child: Column(
@@ -192,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 0.0,
+                          height: 10.0,
                         ),
                         SizedBox(
                           width: 300,
