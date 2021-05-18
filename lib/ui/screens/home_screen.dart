@@ -118,8 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
+                            ),
                             child: SizedBox(
                               width: 350,
                               child: Image.asset(
