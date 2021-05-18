@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             return Column(
               children: [
-                Expanded(
+                Flexible(
                   child: Container(
                     color: Colors.white,
                     child: Center(
@@ -192,6 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         SizedBox(
+                          height: 10.0,
+                        ),
+                        SizedBox(
                           width: 250,
                           child: FittedBox(
                             fit: BoxFit.fitWidth,
@@ -204,6 +207,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
                         ),
                         SizedBox(
                           width: 250,
