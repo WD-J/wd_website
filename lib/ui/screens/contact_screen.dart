@@ -9,6 +9,7 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
+  TextEditingController senderController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
   TextEditingController bodyController = TextEditingController();
 
@@ -26,26 +27,23 @@ class _ContactScreenState extends State<ContactScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
-          Positioned(
-            top: MediaQuery.of(context).size.height / 100 * 16,
-            left: MediaQuery.of(context).size.width / 100 * 2.6,
-            child: Container(
-              height: MediaQuery.of(context).size.height / 100 * 10.5,
-              color: Colors.black,
-              child: FittedBox(
-                fit: BoxFit.fitHeight,
-                child: AnimatedDefaultTextStyle(
-                  duration: Duration(seconds: 1),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  child: Text(
-                    "Contact",
-                  ),
+          Container(
+            height: MediaQuery.of(context).size.height / 100 * 10.5,
+            color: Colors.black,
+            child: FittedBox(
+              fit: BoxFit.fitHeight,
+              child: AnimatedDefaultTextStyle(
+                duration: Duration(seconds: 1),
+                curve: Curves.fastLinearToSlowEaseIn,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                child: Text(
+                  "Contact",
                 ),
               ),
             ),
@@ -160,8 +158,8 @@ class _ContactScreenState extends State<ContactScreen> {
                     left: MediaQuery.of(context).size.width / 100 * 18,
                   ),
                   child: FlatButton(
-                    onPressed: () async {
-                      // Implement OnPressed here
+                    onPressed: () {
+                      // implement
                     },
                     focusColor: Colors.white,
                     textColor: Colors.white,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wd_website/ui/screens/about_screen.dart';
 import 'package:wd_website/ui/screens/contact_screen.dart';
+import 'package:wd_website/ui/screens/home_screen.dart';
 import 'package:wd_website/ui/screens/work_screen.dart';
-
-import '../screens/home_screen.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings settings) {
@@ -11,6 +10,8 @@ class AppRouter {
       case '/':
         return MaterialPageRoute(
           settings: settings,
+          // Page I'm currently working on
+          // TODO: Set to return HomeScreen;
           builder: (_) => HomeScreen(),
         );
 
