@@ -192,10 +192,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 10.0,
+                          height: 0.0,
                         ),
                         SizedBox(
-                          width: 250,
+                          width: 300,
                           child: FittedBox(
                             fit: BoxFit.fitWidth,
                             child: Text(
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 5.0,
                         ),
                         SizedBox(
-                          width: 250,
+                          width: 300,
                           child: FittedBox(
                             fit: BoxFit.fitWidth,
                             child: Text(
@@ -240,7 +240,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Text(
                             'LEARN MORE',
                             style: TextStyle(
-                              fontSize: 12.0,
+                              // fontSize: 12.0,
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                             ),
