@@ -66,9 +66,9 @@ const RESOURCES = {
 "assets/web/assets/images/JJBA_Statistics.png": "28f06e1bb09809f48d5238686e4f681e",
 "assets/web/assets/images/pc.png": "e0c2c2befaf6902c9208f69752156903",
 "favicon.png": "6ce64c0d4427f27fc3c1654ec4f5b5f9",
-"index.html": "8e777722b992a46e22fcf00b117d28da",
-"/": "8e777722b992a46e22fcf00b117d28da",
-"main.dart.js": "607a79bbfa7c2d9a6cffb347cebf511c",
+"index.html": "e5ca071ee1a7e6edec49e6682c9a8033",
+"/": "e5ca071ee1a7e6edec49e6682c9a8033",
+"main.dart.js": "f5c536cb6514b82785587d750d2a183a",
 "manifest.json": "4627e04939ba3ef62bbeb40afdc341e4",
 "version.json": "ca84656c48ebbf56173935de337d569e"
 };
