@@ -1,0 +1,33 @@
+name: wd_website
+description: The William Davies website. Take a look at my work, find out a little bit about me, and contact me!
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.3
+  google_fonts: ^2.1.0
+  url_launcher: ^5.6.0
+
+  bloc: ^7.0.0
+  equatable: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - web/assets/images/
+    - web/assets/app_images/
+    - assets/images/
+    - assets/app_images/

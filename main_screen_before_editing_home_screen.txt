@@ -1,0 +1,1202 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:wd_website/components/project_widget_list.dart';
+
+class HomeScreen extends StatefulWidget {
+  static const String id = "/";
+
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  int currentPosition = 0;
+  List<double> positionList = [30, 42.5, 55.0, 67.5];
+
+  bool materialButtonHover = false;
+  bool contactMeButtonHover = false;
+  bool myWorkButtonHover = false;
+
+  final ScrollController _controller = ScrollController();
+  bool clickDelay = false;
+
+  int currentWorkProjectPosition = 0;
+  List<Color> luminanceList = [
+    Colors.white,
+    Colors.black,
+    Colors.white,
+    Colors.white,
+    Colors.black,
+    Colors.black,
+    Colors.black,
+    Colors.black,
+  ];
+
+  TextEditingController subjectController = TextEditingController();
+  TextEditingController bodyController = TextEditingController();
+
+  String myEmail = 'contact@williamdavies.no';
+
+  _openEmail() async {
+    var url = 'mailto:$myEmail';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          Stack(
+            children: [
+              Stack(
+                children: [
+                  Visibility(
+                    visible: currentPosition == 0 ? true : false,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    child: AnimatedOpacity(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      opacity: currentPosition == 0 ? 1.0 : 0.0,
+                      child: AnimatedPadding(
+                        padding: EdgeInsets.only(
+                          left: currentPosition == 0 ? 0 : MediaQuery.of(context).size.width / 100 * 5,
+                        ),  
+                        duration: Duration(seconds: 1),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 10,
+                              left: MediaQuery.of(context).size.width / 100 * 1.5,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 40,
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: AnimatedDefaultTextStyle(
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    child: Text(
+                                      "Hello",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 36,
+                              left: MediaQuery.of(context).size.width / 100 * 2.6,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 10.5,
+                                color: Colors.black,
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: AnimatedDefaultTextStyle(
+                                    duration: Duration(seconds: 0),
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    child: Text(
+                                      "I'm William Davies. ",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 48.5,
+                              left: MediaQuery.of(context).size.width / 100 * 2.75,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 5.5,
+                                color: Colors.black,
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: AnimatedDefaultTextStyle(
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                    child: Text(
+                                      "Professional Web developer, iOS developer, and Android developer,\nall via Flutter",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 57.5,
+                              left: MediaQuery.of(context).size.width / 100 * 2.75,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 3.5,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      currentPosition = 1;
+                                    });
+                                  },
+                                  onHover: (h) {
+                                    setState(() {
+                                      materialButtonHover = !materialButtonHover;
+                                    });
+                                  },
+                                  focusColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  child: FittedBox(
+                                    fit: BoxFit.fitHeight,
+                                    child: AnimatedDefaultTextStyle(
+                                      duration: Duration(seconds: 1),
+                                      curve: Curves.fastLinearToSlowEaseIn,
+                                      style: GoogleFonts.manrope(
+                                        color: Colors.white.withOpacity(materialButtonHover ? 1 : 0.5),
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                      child: Text(
+                                        "Learn more >",
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 5,
+                              left: MediaQuery.of(context).size.width / 100 * 50,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 85,
+                                width: MediaQuery.of(context).size.width / 100 * 50,
+                                child: Image.asset(
+                                  'images/image_of_me.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: currentPosition == 1 ? true : false,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    child: AnimatedOpacity(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      opacity: currentPosition == 1 ? 1.0 : 0.0,
+                      child: AnimatedPadding(
+                        padding: EdgeInsets.only(
+                          left: currentPosition == 1 ? 0 : MediaQuery.of(context).size.width / 100 * 5,
+                        ),
+                        duration: Duration(seconds: 1),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 16,
+                              left: MediaQuery.of(context).size.width / 100 * 2.6,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 10.5,
+                                color: Colors.black,
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: AnimatedDefaultTextStyle(
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    child: Text(
+                                      "About me",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 28.5,
+                              left: MediaQuery.of(context).size.width / 100 * 2.75,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 100 * 50,
+                                height: MediaQuery.of(context).size.height / 100 * 75,
+                                color: Colors.black,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: AnimatedDefaultTextStyle(
+                                            duration: Duration(seconds: 0),
+                                            curve: Curves.fastLinearToSlowEaseIn,
+                                            style: TextStyle(
+                                              color: Colors.white.withOpacity(0.5),
+                                              fontWeight: FontWeight.w100,
+                                              fontSize: 20.0,
+                                            ),
+                                            child: Text(
+                                                "Hello! My name is William Stratford Pound Davies. I was born and raised in Norway, and I am bilingual (English-Norwegian), as my family is English. I have education equivalent to an A-level in Media and Communication. I started programming at the age of 12, and quickly sought to learn more!\n\nI therefore took courses and joined coding clubs, amongst them, a coding club run by students at the University of Oslo. I continued on consistently programming for years, and eventually took my skills into the business sector. I am genuinely motivated by solving problems, and creating solutions for businesses, and consumers.\n\nI have 4+ years of experience developing natively for Android. During that time, I worked with technologies such as Java, Firebase, REST-API's, general JSON, front and back-end XML. I also have 2+ years of experience within Flutter and Dart. My knowledge from developing natively translated well, and I quickly mastered the framework and language. Other notable technologies I am familiar with include: C#, Unity, Python, HTML 5, CSS, JavaScript, and Git.\n\nI'm always interested in new and exciting opportunities, so feel free to contact me via the contact page, or check out my work!\n\n"),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context).size.height / 100 * 3.5,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                currentPosition = 2;
+                                              });
+                                            },
+                                            onHover: (h) {
+                                              setState(() {
+                                                myWorkButtonHover = !myWorkButtonHover;
+                                              });
+                                            },
+                                            focusColor: Colors.transparent,
+                                            splashColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: AnimatedDefaultTextStyle(
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                style: GoogleFonts.manrope(
+                                                  color: Colors.white.withOpacity(myWorkButtonHover ? 1 : 0.5),
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                                child: Text(
+                                                  "My work >",
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context).size.width / 100 * 2.5,
+                                        ),
+                                        Container(
+                                          height: MediaQuery.of(context).size.height / 100 * 3.5,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                currentPosition = 3;
+                                              });
+                                            },
+                                            onHover: (h) {
+                                              setState(() {
+                                                contactMeButtonHover = !contactMeButtonHover;
+                                              });
+                                            },
+                                            focusColor: Colors.transparent,
+                                            splashColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: AnimatedDefaultTextStyle(
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                style: GoogleFonts.manrope(
+                                                  color: Colors.white.withOpacity(contactMeButtonHover ? 1 : 0.5),
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                                child: Text(
+                                                  "Contact me >",
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 15,
+                              left: MediaQuery.of(context).size.width / 100 * 54,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 75,
+                                width: MediaQuery.of(context).size.width / 100 * 45,
+                                child: Image.asset(
+                                  'images/pc.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: currentPosition == 2 ? true : false,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    child: AnimatedOpacity(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      opacity: currentPosition == 2 ? 1.0 : 0.0,
+                      child: AnimatedPadding(
+                        padding: EdgeInsets.only(
+                          left: currentPosition == 2 ? 0 : MediaQuery.of(context).size.width / 100 * 5,
+                        ),
+                        duration: Duration(seconds: 1),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        child: Listener(
+                          onPointerSignal: (PointerSignalEvent event) {
+                            if (event is PointerScrollEvent) {
+                              if (clickDelay == true) {
+                                return;
+                              } else {
+                                clickDelay = true;
+                                Future.delayed(const Duration(milliseconds: 750), () {
+                                  clickDelay = false;
+                                });
+
+                                if (event.scrollDelta.dy.isNegative) {
+                                  // Scrolled up
+                                  setState(() {
+                                    // Could use null here, but gives "unnecessary statement error"
+                                    currentWorkProjectPosition == 0 ? currentWorkProjectPosition = 0 : currentWorkProjectPosition--;
+                                    _controller.animateTo(_controller.position.extentBefore - MediaQuery.of(context).size.height,
+                                        duration: Duration(milliseconds: 750), curve: Curves.fastLinearToSlowEaseIn);
+                                  });
+                                } else {
+                                  // Scrolled down
+                                  setState(() {
+                                    // Could use null here, but gives "unnecessary statement error"
+                                    currentWorkProjectPosition == 7 ? currentWorkProjectPosition = 7 : currentWorkProjectPosition++;
+                                    _controller.animateTo(_controller.position.extentBefore + MediaQuery.of(context).size.height,
+                                        duration: Duration(milliseconds: 750), curve: Curves.fastLinearToSlowEaseIn);
+                                  });
+                                }
+                              }
+                            }
+                          },
+                          child: GestureDetector(
+                            onVerticalDragEnd: (drag) {
+                              if (clickDelay == true) {
+                                return;
+                              } else {
+                                clickDelay = true;
+                                Future.delayed(const Duration(milliseconds: 750), () {
+                                  clickDelay = false;
+                                });
+
+                                if (!drag.primaryVelocity.isNegative) {
+                                  // Scrolled up
+                                  setState(() {
+                                    // Could use null here, but gives "unnecessary statement error"
+                                    currentWorkProjectPosition == 0 ? currentWorkProjectPosition = 0 : currentWorkProjectPosition--;
+                                    _controller.animateTo(_controller.position.extentBefore - MediaQuery.of(context).size.height,
+                                        duration: Duration(milliseconds: 750), curve: Curves.fastLinearToSlowEaseIn);
+                                  });
+                                } else {
+                                  // Scrolled down
+                                  setState(() {
+                                    // Could use null here, but gives "unnecessary statement error"
+                                    currentWorkProjectPosition == 7 ? currentWorkProjectPosition = 7 : currentWorkProjectPosition++;
+                                    _controller.animateTo(_controller.position.extentBefore + MediaQuery.of(context).size.height,
+                                        duration: Duration(milliseconds: 750), curve: Curves.fastLinearToSlowEaseIn);
+                                  });
+                                }
+                              }
+                            },
+                            child: SingleChildScrollView(
+                              controller: _controller,
+                              physics: NeverScrollableScrollPhysics(),
+                              child: ListView(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                children: [
+                                  Container(
+                                    color: Colors.black,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height,
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 15,
+                                          left: MediaQuery.of(context).size.width / 100 * 50,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 75,
+                                            width: MediaQuery.of(context).size.width / 100 * 45,
+                                            child: FlutterLogo(),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 16,
+                                          left: MediaQuery.of(context).size.width / 100 * 2.6,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 10.5,
+                                            color: Colors.black,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: AnimatedDefaultTextStyle(
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                                child: Text(
+                                                  "My work",
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 28.5,
+                                          left: MediaQuery.of(context).size.width / 100 * 2.75,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 3,
+                                            color: Colors.black,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: AnimatedDefaultTextStyle(
+                                                duration: Duration(seconds: 0),
+                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                style: TextStyle(
+                                                  color: Colors.white.withOpacity(0.5),
+                                                  fontWeight: FontWeight.w100,
+                                                ),
+                                                child: Text(
+                                                  // "The goal with presenting these projects is to accurately\nhighlight my competence as a Flutter developer.",
+                                                  "Accurately highlighting my competence as a Flutter developer.",
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 33.5,
+                                          left: MediaQuery.of(context).size.width / 100 * 2.75,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 5.5,
+                                            color: Colors.black,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: AnimatedDefaultTextStyle(
+                                                duration: Duration(seconds: 0),
+                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                style: TextStyle(
+                                                  color: Colors.white.withOpacity(0.5),
+                                                  fontWeight: FontWeight.w100,
+                                                ),
+                                                child: Text(
+                                                  "There is a total of 11 Applications on display,\nand at the very bottom is a page with a certificate for a course I took.",
+                                                  // "Accurately highlighting my competence as a Flutter developer.",
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 45,
+                                          left: MediaQuery.of(context).size.width / 100 * 2.75,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 3.5,
+                                            color: Colors.black,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: AnimatedDefaultTextStyle(
+                                                duration: Duration(seconds: 0),
+                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                style: TextStyle(
+                                                  color: Colors.white.withOpacity(0.5),
+                                                  fontWeight: FontWeight.w100,
+                                                ),
+                                                child: Text(
+                                                  "Scroll down to continue.\nNote: clicking 'WORK' will take you to the top of the page.",
+                                                  // "Accurately highlighting my competence as a Flutter developer.",
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 55,
+                                          left: MediaQuery.of(context).size.width / 100 * 2.5,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 10,
+                                            color: Colors.black,
+                                            child: FittedBox(
+                                              fit: BoxFit.fitHeight,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    clickDelay = true;
+                                                    Future.delayed(const Duration(milliseconds: 750), () {
+                                                      clickDelay = false;
+                                                    });
+
+                                                    currentWorkProjectPosition = 1;
+                                                    _controller.animateTo(
+                                                        _controller.position.extentBefore + MediaQuery.of(context).size.height,
+                                                        duration: Duration(milliseconds: 750),
+                                                        curve: Curves.fastLinearToSlowEaseIn);
+                                                  });
+                                                },
+                                                onHover: (h) {
+                                                  setState(() {
+                                                    materialButtonHover = !materialButtonHover;
+                                                  });
+                                                },
+                                                focusColor: Colors.transparent,
+                                                splashColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor: Colors.transparent,
+                                                child: AnimatedOpacity(
+                                                  duration: Duration(seconds: 1),
+                                                  curve: Curves.fastLinearToSlowEaseIn,
+                                                  opacity: materialButtonHover ? 1 : 0.5,
+                                                  child: Icon(
+                                                    Icons.arrow_drop_down_circle_outlined,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 8,
+                                    itemBuilder: (context, index) {
+                                      return projectWidgetList[index];
+                                    },
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height,
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          top: MediaQuery.of(context).size.height / 100 * 15,
+                                          left: MediaQuery.of(context).size.width / 100 * 54,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 75,
+                                            width: MediaQuery.of(context).size.width / 100 * 45,
+                                            child: Image.asset(
+                                              'images/astroblurImageButNotReallyBecauseItsGonnaBeABackground.png',
+                                              // ALSO ADD UUH THOSE LINES AROUND PICTURE AND FIX THE LINES BENEATH THE CERTIFICATE IMAGE
+                                              // TODO: The JJBA Soundboard application was an SEO focused project, with great success, built in Java.
+                                              //
+                                              // The application garnered more than
+                                              // 2,540,000 impressions
+                                              // and
+                                              // 191,000 users
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                        top: MediaQuery.of(context).size.height / 100 * 7.5,
+                                                        left: MediaQuery.of(context).size.width / 100 * 1.5,
+                                                      ),
+                                                      child: Container(
+                                                        height: MediaQuery.of(context).size.height / 100 * 6.5,
+                                                        child: FittedBox(
+                                                          fit: BoxFit.fitHeight,
+                                                          child: AnimatedDefaultTextStyle(
+                                                            duration: Duration(seconds: 0),
+                                                            curve: Curves.fastLinearToSlowEaseIn,
+                                                            style: TextStyle(
+                                                              color: Colors.black,
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                            child: Text(
+                                                              'JJBA Soundboard',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsets.only(
+                                                            top: MediaQuery.of(context).size.height / 100 * 1,
+                                                            left: MediaQuery.of(context).size.width / 100 * 1.65,
+                                                          ),
+                                                          child: Container(
+                                                            height: MediaQuery.of(context).size.height / 100 * 25,
+                                                            width: MediaQuery.of(context).size.width / 100 * 35,
+                                                            child: Row(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: AnimatedDefaultTextStyle(
+                                                                    duration: Duration(seconds: 0),
+                                                                    curve: Curves.fastLinearToSlowEaseIn,
+                                                                    style: TextStyle(
+                                                                      color: Colors.black.withOpacity(0.8),
+                                                                      fontWeight: FontWeight.w100,
+                                                                      fontSize: 20.0,
+                                                                    ),
+                                                                    child: Text(
+                                                                      'The JJBA Soundboard application was a Java / SEO focused project, with great success.',
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    bottom: MediaQuery.of(context).size.height / 100 * 5,
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.only(
+                                                          left: MediaQuery.of(context).size.width / 100 * 1.65,
+                                                        ),
+                                                        child: Container(
+                                                          height: MediaQuery.of(context).size.height / 100 * 2,
+                                                          child: FittedBox(
+                                                            fit: BoxFit.fitHeight,
+                                                            child: AnimatedDefaultTextStyle(
+                                                              duration: Duration(seconds: 0),
+                                                              curve: Curves.fastLinearToSlowEaseIn,
+                                                              style: TextStyle(
+                                                                color: Colors.black,
+                                                                fontWeight: FontWeight.bold,
+                                                              ),
+                                                              child: Text(
+                                                                'Check out the complete project:',
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding: EdgeInsets.only(
+                                                          left: MediaQuery.of(context).size.width / 100 * 1.65,
+                                                        ),
+                                                        child: InkWell(
+                                                          onTap: () async {
+                                                            await launch('https://github.com/WD-J/JJBA_soundboard');
+                                                          },
+                                                          focusColor: Colors.transparent,
+                                                          splashColor: Colors.transparent,
+                                                          hoverColor: Colors.transparent,
+                                                          highlightColor: Colors.transparent,
+                                                          child: Container(
+                                                            height: MediaQuery.of(context).size.height / 100 * 2,
+                                                            child: FittedBox(
+                                                              fit: BoxFit.fitHeight,
+                                                              child: AnimatedDefaultTextStyle(
+                                                                duration: Duration(seconds: 0),
+                                                                curve: Curves.fastLinearToSlowEaseIn,
+                                                                style: TextStyle(
+                                                                  color: Colors.black.withOpacity(0.8),
+                                                                  fontWeight: FontWeight.w100,
+                                                                ),
+                                                                child: Text(
+                                                                  'github.com/WD-J/JJBA_soundboard',
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: 2,
+                                    itemBuilder: (context, index) {
+                                      return projectWidgetList[8 + index];
+                                    },
+                                  ),
+                                  Container(
+                                    color: Colors.white,
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height,
+                                    child: Stack(
+                                      children: [
+                                        AnimatedPositioned(
+                                          duration: Duration(seconds: 1),
+                                          curve: Curves.fastOutSlowIn,
+                                          top: currentWorkProjectPosition == 7
+                                              ? MediaQuery.of(context).size.height / 100 * 15
+                                              : MediaQuery.of(context).size.height / 100 * 17.5,
+                                          left: MediaQuery.of(context).size.width / 100 * 45,
+                                          child: Container(
+                                            height: MediaQuery.of(context).size.height / 100 * 75,
+                                            width: MediaQuery.of(context).size.width / 100 * 45,
+                                            child: Image.asset(
+                                              'images/certificate.jpg',
+                                              fit: BoxFit.contain,
+                                            ),
+                                          ),
+                                        ),
+                                        AnimatedPadding(
+                                          duration: Duration(seconds: 1),
+                                          curve: Curves.fastOutSlowIn,
+                                          padding: EdgeInsets.only(
+                                            top: MediaQuery.of(context).size.height / 100 * 87.5,
+                                            left: currentWorkProjectPosition == 7
+                                                ? MediaQuery.of(context).size.width / 100 * 45
+                                                : MediaQuery.of(context).size.width / 100 * 67.5,
+                                          ),
+                                          child: AnimatedContainer(
+                                            duration: Duration(seconds: 1),
+                                            curve: Curves.fastOutSlowIn,
+                                            padding: EdgeInsets.only(
+                                              top: MediaQuery.of(context).size.height / 100 * 87.5,
+                                              left: currentWorkProjectPosition == 7
+                                                  ? MediaQuery.of(context).size.width / 100 * 45
+                                                  : MediaQuery.of(context).size.width / 100 * 67.5,
+                                            ),
+                                            height: currentWorkProjectPosition == 7 ? MediaQuery.of(context).size.height / 100 * 0.25 : 0,
+                                            width: currentWorkProjectPosition == 7 ? MediaQuery.of(context).size.width / 100 * 45 : 0,
+                                            color: Colors.black.withOpacity(0.75),
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: MediaQuery.of(context).size.height / 100 * 7.5,
+                                                left: MediaQuery.of(context).size.width / 100 * 1.5,
+                                              ),
+                                              child: Container(
+                                                height: MediaQuery.of(context).size.height / 100 * 6.5,
+                                                child: FittedBox(
+                                                  fit: BoxFit.fitHeight,
+                                                  child: AnimatedDefaultTextStyle(
+                                                    duration: Duration(seconds: 0),
+                                                    curve: Curves.fastLinearToSlowEaseIn,
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                    child: Text(
+                                                      'Certificate',
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Row(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                    top: MediaQuery.of(context).size.height / 100 * 1,
+                                                    left: MediaQuery.of(context).size.width / 100 * 1.65,
+                                                  ),
+                                                  child: Container(
+                                                    height: MediaQuery.of(context).size.height / 100 * 25,
+                                                    width: MediaQuery.of(context).size.width / 100 * 35,
+                                                    child: Row(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: AnimatedDefaultTextStyle(
+                                                            duration: Duration(seconds: 0),
+                                                            curve: Curves.fastLinearToSlowEaseIn,
+                                                            style: TextStyle(
+                                                              color: Colors.black.withOpacity(0.8),
+                                                              fontWeight: FontWeight.w100,
+                                                              fontSize: 20.0,
+                                                            ),
+                                                            child: Text(
+                                                              'This is a certificate for a Flutter development Course, made by Google.',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: currentPosition == 3 ? true : false,
+                    maintainState: true,
+                    maintainAnimation: true,
+                    child: AnimatedOpacity(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      opacity: currentPosition == 3 ? 1.0 : 0.0,
+                      child: AnimatedPadding(
+                        padding: EdgeInsets.only(
+                          left: currentPosition == 3 ? 0 : MediaQuery.of(context).size.width / 100 * 5,
+                        ),
+                        duration: Duration(seconds: 1),
+                        curve: Curves.fastLinearToSlowEaseIn,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 16,
+                              left: MediaQuery.of(context).size.width / 100 * 2.6,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 10.5,
+                                color: Colors.black,
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: AnimatedDefaultTextStyle(
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    child: Text(
+                                      "Contact",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 28.5,
+                              left: MediaQuery.of(context).size.width / 100 * 2.75,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 2.5,
+                                child: FittedBox(
+                                  fit: BoxFit.fitHeight,
+                                  child: AnimatedDefaultTextStyle(
+                                    duration: Duration(seconds: 0),
+                                    curve: Curves.fastLinearToSlowEaseIn,
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.5),
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          " Get in touch via the form below, or by emailing ",
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            _openEmail();
+                                          },
+                                          // onHover: (h) {},
+                                          focusColor: Colors.transparent,
+                                          splashColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          child: Text(
+                                            "contact@williamdavies.no",
+                                            style: TextStyle(
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height / 100 * 35,
+                                left: MediaQuery.of(context).size.width / 100 * 2.75,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(width: MediaQuery.of(context).size.width),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width / 100 * 25,
+                                    child: TextField(
+                                      controller: subjectController,
+                                      cursorColor: Colors.white,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: "Subject",
+                                        contentPadding: EdgeInsets.all(20.0),
+                                        hintStyle: TextStyle(
+                                          color: Colors.white.withOpacity(0.75),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                          borderSide: BorderSide(width: 1, color: Colors.white.withOpacity(0.75)),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                          borderSide: BorderSide(width: 2, color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: MediaQuery.of(context).size.height / 100 * 2.5),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width / 100 * 25,
+                                    // height: MediaQuery.of(context).size.height / 100 * 25,
+                                    child: TextField(
+                                      controller: bodyController,
+                                      minLines: 10,
+                                      maxLines: 10,
+                                      cursorColor: Colors.white,
+                                      style: TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: "Body",
+                                        contentPadding: EdgeInsets.all(20.0),
+                                        hintStyle: TextStyle(
+                                          color: Colors.white.withOpacity(0.75),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                          borderSide: BorderSide(width: 1, color: Colors.white.withOpacity(0.75)),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                                          borderSide: BorderSide(width: 2, color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: MediaQuery.of(context).size.height / 100 * 2.5),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width / 100 * 18,
+                                    ),
+                                    child: FlatButton(
+                                      onPressed: () async {
+                                        // Implement OnPressed here
+                                      },
+                                      focusColor: Colors.white,
+                                      textColor: Colors.white,
+                                      padding: EdgeInsets.only(top: 25.0, bottom: 25.0, left: 50.0, right: 50.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                        side: BorderSide(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "SEND",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height / 100 * 12.5,
+                              left: MediaQuery.of(context).size.width / 100 * 52.5,
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 100 * 75,
+                                width: MediaQuery.of(context).size.width / 100 * 45,
+                                child: Image.asset(
+                                  'images/contact.png',
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Stack(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  NavigatorButton(
+                    buttonNumber: 0,
+                    luminanceColor: currentPosition < 2 || currentPosition == 3 ? Colors.white : luminanceList[currentWorkProjectPosition],
+                    hoverOpacity: currentPosition == 0 ? 1.0 : 0.5,
+                    onTap: () {
+                      setState(() {
+                        currentPosition = 0;
+                      });
+                    },
+                  ),
+                  NavigatorButton(
+                    buttonNumber: 1,
+                    luminanceColor: currentPosition < 2 || currentPosition == 3 ? Colors.white : luminanceList[currentWorkProjectPosition],
+                    hoverOpacity: currentPosition == 1 ? 1.0 : 0.5,
+                    onTap: () {
+                      setState(() {
+                        currentPosition = 1;
+                      });
+                    },
+                  ),
+                  NavigatorButton(
+                    buttonNumber: 2,
+                    luminanceColor: currentPosition < 2 || currentPosition == 3 ? Colors.white : luminanceList[currentWorkProjectPosition],
+                    hoverOpacity: currentPosition == 2 ? 1.0 : 0.5,
+                    onTap: () {
+                      currentPosition == 2
+                          ? setState(() {
+                              clickDelay = true;
+                              Future.delayed(const Duration(milliseconds: 750), () {
+                                clickDelay = false;
+                              });
+
+                              currentWorkProjectPosition = 0;
+                              _controller.animateTo(0, duration: Duration(milliseconds: 750), curve: Curves.fastLinearToSlowEaseIn);
+                            })
+                          : setState(() {
+                              currentPosition = 2;
+                            });
+                    },
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: NavigatorButton(
+                  buttonNumber: 3,
+                  luminanceColor: currentPosition < 2 || currentPosition == 3 ? Colors.white : luminanceList[currentWorkProjectPosition],
+                  hoverOpacity: currentPosition == 3 ? 1.0 : 0.5,
+                  onTap: () {
+                    setState(() {
+                      currentPosition = 3;
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NavigatorButton extends StatelessWidget {
+  const NavigatorButton({
+    @required this.buttonNumber,
+    @required this.luminanceColor,
+    @required this.hoverOpacity,
+    @required this.onTap,
+  });
+
+  final int buttonNumber;
+  final Function onTap;
+  final double hoverOpacity;
+  final Color luminanceColor;
+
+  static const List<String> buttonTextList = ['HOME', 'ABOUT', 'WORK', 'CONTACT'];
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width / 100 * 2,
+        right: MediaQuery.of(context).size.width / 100 * 2,
+        top: MediaQuery.of(context).size.height / 100 * 1.75,
+      ),
+      child: InkWell(
+        onTap: onTap,
+        focusColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        child: Container(
+          height: MediaQuery.of(context).size.height / 100 * 3.5,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: AnimatedDefaultTextStyle(
+              duration: Duration(seconds: 1),
+              curve: Curves.fastLinearToSlowEaseIn,
+              style: GoogleFonts.manrope(
+                color: luminanceColor.withOpacity(hoverOpacity),
+                fontWeight: FontWeight.w300,
+                letterSpacing: MediaQuery.of(context).size.height / 100 * 0.3,
+              ),
+              child: Text(
+                buttonTextList[buttonNumber],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
