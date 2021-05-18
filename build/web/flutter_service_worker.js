@@ -15,7 +15,7 @@ const RESOURCES = {
 "assets/app_images/todoey.png": "547d48f96f7882cb682aaedae9854ecf",
 "assets/app_images/wikileaks_news.png": "99f1ffd3b630cd3b889680046c66fb8b",
 "assets/app_images/xylophone.png": "5a9b05f0696af70640e68d81f7ebb1f3",
-"assets/AssetManifest.json": "b382ef02ce9289608f996b2c1e3e5f17",
+"assets/AssetManifest.json": "278cf02347eece957386515c2478d157",
 "assets/assets/app_images/bmi.png": "92cb62090106562274acd0d0ae70fe97",
 "assets/assets/app_images/clima.png": "b5f60778d1c2eb226745e84ca6e62f6c",
 "assets/assets/app_images/cointicker.png": "4b3eda0ff95869bf277582048d721579",
@@ -66,9 +66,9 @@ const RESOURCES = {
 "assets/web/assets/images/JJBA_Statistics.png": "28f06e1bb09809f48d5238686e4f681e",
 "assets/web/assets/images/pc.png": "e0c2c2befaf6902c9208f69752156903",
 "favicon.png": "6ce64c0d4427f27fc3c1654ec4f5b5f9",
-"index.html": "f0f3dce8b1f03ef679c645786e6b92bf",
-"/": "f0f3dce8b1f03ef679c645786e6b92bf",
-"main.dart.js": "2fe30e5d5b9833e81e9d6505361d7298",
+"index.html": "d7fc8aa0a37293df4fd09f1c326809bf",
+"/": "d7fc8aa0a37293df4fd09f1c326809bf",
+"main.dart.js": "996e8b7e9ee04e8151a4605a56ff8d0c",
 "manifest.json": "4627e04939ba3ef62bbeb40afdc341e4",
 "version.json": "ca84656c48ebbf56173935de337d569e"
 };

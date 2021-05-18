@@ -29,5 +29,3 @@ flutter:
   assets:
     - web/assets/images/
     - web/assets/app_images/
-    - assets/images/
-    - assets/app_images/

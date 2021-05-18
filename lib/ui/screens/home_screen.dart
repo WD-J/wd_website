@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: FittedBox(
                           fit: BoxFit.fitWidth,
                           child: Text(
-                            "Professional Web developer, iOS developer, and Android developer,\nall via Flutter",
+                            'Professional Web developer, iOS developer, and Android developer,\nall via Flutter',
                             style: TextStyle(
                               color: Colors.white60,
                               fontWeight: FontWeight.bold,
@@ -165,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           color: Colors.black,
                           child: Image.asset(
-                            'assets/images/image_of_me.png',
+                            'web/assets/images/image_of_me.png',
                             fit: BoxFit.contain,
                           ),
                         ),
