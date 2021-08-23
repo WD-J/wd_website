@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wd_website/ui/components/project_widget_list.dart';
+import 'package:wd_website/ui/widgets/project_widget_list.dart';
 
 class WorkScreen extends StatefulWidget {
-  const WorkScreen({Key key}) : super(key: key);
+  const WorkScreen({Key? key}) : super(key: key);
 
   @override
   _WorkScreenState createState() => _WorkScreenState();
@@ -72,7 +72,7 @@ class _WorkScreenState extends State<WorkScreen> {
                 clickDelay = false;
               });
 
-              if (!drag.primaryVelocity.isNegative) {
+              if (!drag.primaryVelocity!.isNegative) {
                 // Scrolled up
                 setState(() {
                   // Could use null here, but gives "unnecessary statement error"

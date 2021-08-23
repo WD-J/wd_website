@@ -5,7 +5,7 @@ import 'package:wd_website/ui/screens/home_screen.dart';
 import 'package:wd_website/ui/screens/work_screen.dart';
 
 class AppRouter {
-  Route onGenerateRoute(RouteSettings settings) {
+  Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
